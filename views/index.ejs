@@ -1,0 +1,49 @@
+
+<% let index = 0 %> 
+<h1> <%= %></h1>
+<table border="1">
+<tr>
+    <th>NAME</th>
+    <th>Bit-Fee</th>
+    <th>Bit-Price</th>
+    <th>B-FeeINR</th>
+    <th>WX-Price</th>
+    <th>DIFF</th>
+    <th>WX-Fee</th>
+    <th>WX-Fee-INR</th>
+</tr>
+<% for( let i = 0; i < withbit.length-3; i++ ) { %>
+    <tr>
+        <% var name =(withbit[i].name).toUpperCase(); %> 
+    <% if (price_bit[name] != null) { %>
+        <% 
+           var Bit_Fee = (withbit[i].fee);
+           var Bit_Price=price_bit[name].last_traded_price ; 
+        %> 
+        <td><%= name %></td>
+        <td><%= Bit_Fee %></td>
+        <td><%= Bit_Price %></td>
+        <td><%=  ( parseFloat(Bit_Price) * parseFloat(Bit_Fee) ).toFixed(2)  %></td>
+          <% var W_market = price_wx.markets; 
+             var W_assets = price_wx.assets;
+             var nameL =(name).toLowerCase();
+             var indexW =W_market.findIndex(x => x.baseMarket == nameL && x.quoteMarket == "inr")
+          %> 
+            <% if (indexW != -1) { %>
+                <%  var WX_Fee =W_assets[W_assets.findIndex(x => x.type == nameL )].withdrawFee; %> 
+                <td><%= W_market[indexW].buy; %> </td>
+                <td><%= (parseFloat(Bit_Price) - parseFloat(W_market[indexW].buy)).toFixed(2); %> </td>
+                <td><%= WX_Fee %> </td>
+                <td><%= (parseFloat(WX_Fee) * parseFloat(W_market[indexW].buy)).toFixed(2); %> </td>
+            <% } %>
+           
+    <% } else { %>
+        <td><%= name %></td>
+        <td><%= Bit_Fee  %></td>
+        <td>null</td>
+     
+    <% } %>
+    </tr> 
+<% } %>
+</table>      
+       
