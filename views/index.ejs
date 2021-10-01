@@ -1,20 +1,35 @@
-
+<style>
+    .header {
+        position: sticky;
+        top:0;
+    }
+    .container {
+        width: 600px;
+        height: 300px;
+        overflow: auto;
+    }
+    h1{
+        color: green;
+    }
+</style>
 <% let index = 0 %> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <% var usdtINR = (parseFloat(USD_inr.USD_INR)).toFixed(2) %> 
 <h1> USD Price : <%= usdtINR %></h1>
-<table border="1">
-    <thead style="position: sticky;top: 0">
+<table border="1" class="table">
+    <thead style="position: sticky;top: 0" class="thead-dark">
 <tr>
-    <th>NAME</th>
-    <th>Bit-Fee</th>
-    <th>Bit-Price</th>
-    <th>B-FeeINR</th>
-    <th>WX-Price</th>
-    <th>Bit - WX </th>
-    <th>WX-Fee</th>
-    <th>WX-Fee-INR</th>
-    <th>BNC-PRICE</th>
-    <th>BIT - BNC</th>
+    <th class="header" scope="col" >NAME</th>
+    <th class="header" scope="col" >Bit-Fee</th>
+    <th class="header" scope="col" >Bit-Price</th>
+    <th class="header" scope="col" >B-FeeINR</th>
+    <th class="header" scope="col" >WX-Price</th>
+    <th class="header" scope="col" >Bit - WX </th>
+    <th class="header" scope="col" >WX-Fee</th>
+    <th class="header" scope="col" >WX-Fee-INR</th>
+    <th class="header" scope="col" >BNC-PRICE</th>
+    <th class="header" scope="col" >BIT - BNC</th>
+    <th class="header" scope="col" >BTC-INR</th>
 </tr>
 </thead>
 <% for( let i = 0; i < withbit.length-3; i++ ) { %>
@@ -24,8 +39,11 @@
         <% 
            var Bit_Fee = (withbit[i].fee);
            var Bit_Price=price_bit[name].last_traded_price ; 
-           var binance_Price = binance.findIndex(x => x.symbol == name+"USDT" )
+           var binance_Price = binance.findIndex(x => x.symbol == name+"USDT" );
+           var BNC_BTC_INR = (parseFloat(binance[binance.findIndex(x => x.symbol == "BTCUSDT" )].price) *usdtINR).toFixed(2);
+           var BNC_BTC_INDEX = binance.findIndex(x => x.symbol == name+"BTC" );
         %> 
+        
         <td><%= name %></td>
         <td><%= Bit_Fee %></td>
         <td><%= Bit_Price %></td>
@@ -50,15 +68,31 @@
                 <td>-</td>
              
             <% } %>
-            <% if (binance_Price  != -1) { %>
-                <% var BNC_price = (parseFloat(binance[binance_Price].price)*usdtINR).toFixed(2) %> 
+            <% if (binance_Price  != -1 ) { %>
+                <% var BNC_price = (parseFloat(binance[binance_Price].price)*usdtINR).toFixed(2);
+           %>
+           
                 <td><%=  BNC_price %></td>
                 <td><%= (Bit_Price - BNC_price).toFixed(2) %> </td>
+              
+               
                 <% } else { %>
                     <td>-</td>
                     <td>-</td>
+                    
                     <% } %>
-
+                    <% if (BNC_BTC_INDEX != -1) { %>
+                        <% var BNC_price_BTC = (parseFloat(binance[BNC_BTC_INDEX].price) * BNC_BTC_INR).toFixed(2); %> 
+                        <td><%= BNC_price_BTC %> </td>
+                        <td>
+                            <%= (Bit_Price - BNC_price_BTC).toFixed(2) %> 
+                        </td>
+                        
+                        <% } else { %>
+                            <td>-</td>
+                            <td>-</td>
+                            
+                            <% } %>
     <% } else { %>
         <td><%= name %></td>
         <td><%= Bit_Fee  %></td>
@@ -69,7 +103,8 @@
         <td>-</td>
         <td>-</td>
         <td>-</td>
-        
+        <td>-</td>
+        <td>-</td>        
      
     <% } %>
     </tr> 
