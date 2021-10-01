@@ -1,17 +1,22 @@
 
 <% let index = 0 %> 
-<h1> <%= %></h1>
+<% var usdtINR = (parseFloat(USD_inr.USD_INR)).toFixed(2) %> 
+<h1> USD Price : <%= usdtINR %></h1>
 <table border="1">
+    <thead style="position: sticky;top: 0">
 <tr>
     <th>NAME</th>
     <th>Bit-Fee</th>
     <th>Bit-Price</th>
     <th>B-FeeINR</th>
     <th>WX-Price</th>
-    <th>DIFF</th>
+    <th>Bit - WX </th>
     <th>WX-Fee</th>
     <th>WX-Fee-INR</th>
+    <th>BNC-PRICE</th>
+    <th>BIT - BNC</th>
 </tr>
+</thead>
 <% for( let i = 0; i < withbit.length-3; i++ ) { %>
     <tr>
         <% var name =(withbit[i].name).toUpperCase(); %> 
@@ -19,10 +24,12 @@
         <% 
            var Bit_Fee = (withbit[i].fee);
            var Bit_Price=price_bit[name].last_traded_price ; 
+           var binance_Price = binance.findIndex(x => x.symbol == name+"USDT" )
         %> 
         <td><%= name %></td>
         <td><%= Bit_Fee %></td>
         <td><%= Bit_Price %></td>
+       
         <td><%=  ( parseFloat(Bit_Price) * parseFloat(Bit_Fee) ).toFixed(2)  %></td>
           <% var W_market = price_wx.markets; 
              var W_assets = price_wx.assets;
@@ -35,12 +42,34 @@
                 <td><%= (parseFloat(Bit_Price) - parseFloat(W_market[indexW].buy)).toFixed(2); %> </td>
                 <td><%= WX_Fee %> </td>
                 <td><%= (parseFloat(WX_Fee) * parseFloat(W_market[indexW].buy)).toFixed(2); %> </td>
+            
+            <% } else { %>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+             
             <% } %>
-           
+            <% if (binance_Price  != -1) { %>
+                <% var BNC_price = (parseFloat(binance[binance_Price].price)*usdtINR).toFixed(2) %> 
+                <td><%=  BNC_price %></td>
+                <td><%= (Bit_Price - BNC_price).toFixed(2) %> </td>
+                <% } else { %>
+                    <td>-</td>
+                    <td>-</td>
+                    <% } %>
+
     <% } else { %>
         <td><%= name %></td>
         <td><%= Bit_Fee  %></td>
-        <td>null</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        
      
     <% } %>
     </tr> 

@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var price_wx;
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  var fs = require("fs");
+var fs = require("fs");
   var Papa = require("papaparse");
   var getJSON = require('get-json')
   var withbit;
-  var price_bit;
+  var price_bit,USD_inr,binance;
+/* GET home page. */
+router.get('/', function (req, res, next) {
+  
   function readData(err, data) {
     var csv = data.toString();
     Papa.parse(csv, {
@@ -23,7 +24,23 @@ router.get('/', function (req, res, next) {
             
             price_wx = response;
             //console.log(response);
-            res.render('index', { title: 'Express', price_bit: price_bit, withbit: withbit ,price_wx : price_wx});
+            getJSON('https://free.currconv.com/api/v7/convert?q=USD_inr&compact=ultra&apiKey=0ae2e14e0071bd60fd1d', function (error, response) {
+            
+              USD_inr = response;
+            getJSON('https://api.binance.com/api/v3/ticker/price', function (error, response) {
+            
+              
+              binance =response;
+              console.log(response[0].symbol);
+              res.render('index', { title: 'Express', price_bit: price_bit, withbit: withbit ,price_wx : price_wx,USD_inr : USD_inr,binance : binance });
+
+
+          })
+              
+
+
+          })
+            
 
 
           })
