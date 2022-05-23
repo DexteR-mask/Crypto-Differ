@@ -55,13 +55,13 @@
              var nameL =(name).toLowerCase();
              var indexW =W_market.findIndex(x => x.baseMarket == nameL && x.quoteMarket == "inr")
           %> 
-            <% if (indexW != -1) { %>
-                <%  var WX_Fee =W_assets[W_assets.findIndex(x => x.type == nameL )].withdrawFee; %> 
+            <% if (indexW != -1 && W_assets[W_assets.findIndex(x => x.type == nameL )] != undefined) { %>
+               <%  var WX_Fee =W_assets[W_assets.findIndex(x => x.type == nameL )].withdrawFee; %> 
                 <td><%= W_market[indexW].buy; %> </td>
                 <td><%= (parseFloat(Bit_Price) - parseFloat(W_market[indexW].buy)).toFixed(2); %> </td>
                 <td><%= WX_Fee %> </td>
                 <td><%= (parseFloat(WX_Fee) * parseFloat(W_market[indexW].buy)).toFixed(2); %> </td>
-            
+                
             <% } else { %>
                 <td>-</td>
                 <td>-</td>
