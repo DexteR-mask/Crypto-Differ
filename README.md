@@ -12,12 +12,12 @@ In economics and finance, arbitrage is the practice of taking advantage of a dif
 Crypto-Differ uses the data from the local apis of Binance,WazirX,BitBns and does some computation and finds out how we can  carry out an Arbitrage.
 
 
+## Terminology :
+* NAME: Name of the Cryptocurrency
 
-NAME: Name of the Cryptocurrency
+* Bit-Fee: Bitbns Withdrawal Fees in Cryptocurrency 
 
-Bit-Fee: Bitbns Withdrawal Fees in Cryptocurrency 
-
-Bit-Price: Bitbns Cryptocurrency  price in INR 
+* Bit-Price: Bitbns Cryptocurrency  price in INR 
 
 B-FeeINR :	Bitbns Withdrawal Fees in INR
 
