@@ -23,7 +23,10 @@ WX-Fee	: Bitbns Withdrawal Fees in Cryptocurrency
 WX-Fee-INR: Wazirx Withdrawal Fees in INR
 BNC-PRICE	 : Binance Cryptocurrency  price in INR based on current USD to INR Conversion
 BIT - BNC : Price Difference between BitBns - Binance in INR 
-BTC-INR	
-BIT - BTC 
+BTC-INR	: Bitbns Cryptocurrency  price in BTc 
+BIT - BTC :  Price Difference between BitBns - [BTC-INR] in INR 
+
+* "-" The exchange dose not support the coin or withdrawal is not allowed. 
+
 ## Live Priview
 https://stormy-spire-56617.herokuapp.com/
