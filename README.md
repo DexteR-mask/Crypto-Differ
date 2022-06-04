@@ -36,9 +36,9 @@ Crypto-Differ is specific to India Users and that but rest of them lose when it 
 
 * BIT - BNC : Price Difference between BitBns - Binance in INR 
 
-BTC-INR	: Bitbns Cryptocurrency  price in BTc 
+* BTC-INR	: Bitbns Cryptocurrency  price in BTc 
 
-BIT - BTC :  Price Difference between BitBns - [BTC-INR] in INR 
+* BIT - BTC :  Price Difference between BitBns - [BTC-INR] in INR 
 
 * "-" The exchange dose not support the coin or withdrawal is not allowed. 
 
