@@ -8,14 +8,14 @@ var fs = require("fs");
   var price_bit,USD_inr,binance;
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  
+  console.log("ho");
   function readData(err, data) {
     var csv = data.toString();
     Papa.parse(csv, {
       header: true,
       dynamicTyping: true,
       complete: function (results) {
-        // console.log("Finished:", results.data);
+         //console.log("Finished:", results.data);
         withbit = results.data;
         getJSON('https://bitbns.com/order/getTickerWithVolume/', function (error, response) {
           //console.log(response);
@@ -24,9 +24,9 @@ router.get('/', function (req, res, next) {
             
             price_wx = response;
             //console.log(response);
-            getJSON('https://free.currconv.com/api/v7/convert?q=USD_inr&compact=ultra&apiKey=0ae2e14e0071bd60fd1d', function (error, response) {
+            //getJSON('https://free.currconv.com/api/v7/convert?q=USD_inr&compact=ultra&apiKey=0ae2e14e0071bd60fd1d', function (error, response) {
             
-              USD_inr = response;
+              USD_inr = 78.7878;
             getJSON('https://api.binance.com/api/v3/ticker/price', function (error, response) {
             
               
@@ -38,8 +38,7 @@ router.get('/', function (req, res, next) {
           })
               
 
-
-          })
+// })
             
 
 
