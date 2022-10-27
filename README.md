@@ -44,3 +44,5 @@ Crypto-Differ is specific to India Users and that but rest of them lose when it 
 
 ## Live Priview
 https://stormy-spire-56617.herokuapp.com/
+## Alternate Live Priview
+https://jaspreet-singh.azurewebsites.net/
