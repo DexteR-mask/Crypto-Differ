@@ -43,6 +43,6 @@ Crypto-Differ is specific to India Users and that but rest of them lose when it 
 * "-" The exchange dose not support the coin or withdrawal is not allowed. 
 
 ## Live Priview
-https://stormy-spire-56617.herokuapp.com/
+https://stormy-spire-56617.herokuapp.com/ (not_working)
 ## Alternate Live Priview
 https://jaspreet-singh.azurewebsites.net/
